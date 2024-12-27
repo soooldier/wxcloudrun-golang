@@ -298,7 +298,12 @@
     });
   }
   function login() {
-    window.location.href = "https://mp.weixin.qq.com/s/1234567890";
+    var redirect="https://golang-rutc-133482-9-1333979547.sh.run.tcloudbase.com/api/callback";
+    var appid="wx9615e00ae1398eda";
+    var url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appid
+        +"&redirect_uri="+redirect
+        +"&response_type=code&scope=snsapi_userinfo#wechat_redirect"
+    document.location.href=url;
   }
 </script>
 
