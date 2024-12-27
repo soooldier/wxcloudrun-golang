@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	appId     = "wx9615e00ae1398eda"
+	appId     = "wx3c75928156e8d4b5"
 	appSecret = "eaf1ea75602bb17551f789e63e04c1e2"
 	token     = "TOKEN"
 )
