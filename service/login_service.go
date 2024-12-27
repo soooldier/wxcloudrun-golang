@@ -12,7 +12,7 @@ import (
 
 var (
 	appId     = "wx3c75928156e8d4b5"
-	appSecret = "eaf1ea75602bb17551f789e63e04c1e2"
+	appSecret = "7f11075ad1be539acfca914f1b2014bb"
 	token     = "TOKEN"
 )
 
