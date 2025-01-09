@@ -14,6 +14,7 @@ func main() {
 	}
 
 	http.HandleFunc("/", service.IndexHandler)
+	http.HandleFunc("/MP_verify_32iWga2EVle6QTQm.txt", service.MpVerifyHandler)
 	http.HandleFunc("/api/count", service.CounterHandler)
 	http.HandleFunc("/api/callback", service.LoginHandler)
 

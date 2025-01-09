@@ -30,6 +30,16 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, data)
 }
 
+// MpVerifyHandler 微信验证
+func MpVerifyHandler(w http.ResponseWriter, r *http.Request) {
+	b, err := ioutil.ReadFile("./MP_verify_32iWga2EVle6QTQm.txt")
+	if err != nil {
+		fmt.Fprint(w, "内部错误")
+		return
+	}
+	fmt.Fprint(w, string(b))
+}
+
 // CounterHandler 计数器接口
 func CounterHandler(w http.ResponseWriter, r *http.Request) {
 	res := &JsonResult{}
