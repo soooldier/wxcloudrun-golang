@@ -2,8 +2,8 @@ package service
 
 import (
 	"encoding/json"
-	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/silenceper/wechat/v2"
 	"github.com/silenceper/wechat/v2/cache"
 	"github.com/silenceper/wechat/v2/officialaccount/config"
@@ -17,22 +17,22 @@ var (
 )
 
 // LoginHandler 微信登录
-func LoginHandler(w http.ResponseWriter, r *http.Request) {
-	code := r.URL.Query().Get("code")
-	user, err := GetWechatOfficialNickname(appId, appSecret, token, code, cache.NewMemory())
+func LoginHandler(c *gin.Context) {
+	code := c.Query("code")
+	user, err := getWechatOfficialNickname(appId, appSecret, token, code, cache.NewMemory())
 	if err != nil {
-		w.Write([]byte(err.Error()))
-		return
+		c.HTML(500, err.Error(), nil)
+		c.Abort()
 	}
 	user4json, err := json.Marshal(user)
 	if err != nil {
-		w.Write([]byte(err.Error()))
-		return
+		c.HTML(500, err.Error(), nil)
+		c.Abort()
 	}
-	w.Write(user4json)
+	c.HTML(200, string(user4json), nil)
 }
 
-func GetWechatOfficialNickname(appId, appSecret, token, code string, cache cache.Cache) (userinfo oauth.UserInfo, err error) {
+func getWechatOfficialNickname(appId, appSecret, token, code string, cache cache.Cache) (userinfo oauth.UserInfo, err error) {
 	cfg := &config.Config{
 		AppID:     appId,
 		AppSecret: appSecret,
