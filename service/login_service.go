@@ -3,6 +3,7 @@ package service
 import (
 	"encoding/json"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/silenceper/wechat/v2"
 	"github.com/silenceper/wechat/v2/cache"
@@ -29,6 +30,9 @@ func LoginHandler(c *gin.Context) {
 		c.HTML(500, err.Error(), nil)
 		c.Abort()
 	}
+	session := sessions.Default(c)
+	session.Set("openid4wechat", user.OpenID)
+	session.Save()
 	c.HTML(200, string(user4json), nil)
 }
 
