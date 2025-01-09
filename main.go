@@ -25,5 +25,10 @@ func main() {
 		c.HTML(200, string("32iWga2EVle6QTQm"), nil)
 	})
 	r.GET("/api/callback", service.LoginHandler)
+	r.GET("/api/saml", func(c *gin.Context) {
+		openid4interface := sessions.Default(c).Get("openid4wechat")
+		openid4string := openid4interface.(string)
+		c.HTML(200, openid4string, nil)
+	})
 	r.Run(":80")
 }
