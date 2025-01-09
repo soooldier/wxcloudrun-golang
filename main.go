@@ -1,9 +1,7 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
-	"wxcloudrun-golang/db"
 	"wxcloudrun-golang/service"
 
 	"github.com/gin-contrib/sessions"
@@ -13,12 +11,8 @@ import (
 
 func main() {
 	r := gin.Default()
-	if err := db.Init(); err != nil {
-		panic(fmt.Sprintf("mysql init failed with %+v", err))
-	}
 	store := memstore.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
-
 	r.GET("/", func(c *gin.Context) {
 		b, err := ioutil.ReadFile("./index.html")
 		if err != nil {
